@@ -61,19 +61,20 @@ target_link_libraries(continuous_detector common_functions)
 #############
 ## Install ##
 #############
-install(DIRECTORY include/
-  DESTINATION include/${PROJECT_NAME})
+# install(DIRECTORY include/
+#   DESTINATION include/${PROJECT_NAME})
 
-install(TARGETS common_functions
-  EXPORT export_${PROJECT_NAME}
-  LIBRARY DESTINATION lib
-  ARCHIVE DESTINATION lib
-  RUNTIME DESTINATION bin)
+# install(TARGETS common_functions
+#   EXPORT export_${PROJECT_NAME}
+#   LIBRARY DESTINATION lib
+#   ARCHIVE DESTINATION lib
+#   RUNTIME DESTINATION bin)
 
-install(TARGETS continuous_detector
-  DESTINATION lib/${PROJECT_NAME})
+# install(TARGETS continuous_detector
+#   DESTINATION lib/${PROJECT_NAME})
 
-install(DIRECTORY launch 
-  DESTINATION share/${PROJECT_NAME})
+# install(DIRECTORY launch 
+#   DESTINATION share/${PROJECT_NAME})
 
-ament_package()
+# ament_package()
+ament_auto_package()
