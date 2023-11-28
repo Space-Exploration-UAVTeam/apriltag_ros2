@@ -47,6 +47,7 @@ ament_target_dependencies(common_functions PUBLIC
  std_msgs
  cv_bridge
  apriltag_ros2_interfaces
+ OpenCV
  )
 target_include_directories(common_functions
   PUBLIC
