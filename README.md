@@ -21,7 +21,7 @@ Clone AprilTag library into your catkin workspace
 ```
 cd apriltag-master
 cmake -B build -DCMAKE_BUILD_TYPE=Release -DBUILD_SHARED_LIBS=ON
-#sudo cmake --build build --target install
+sudo cmake --build build --target install   #may not installed on ARM64 machine, so try the followings:
 make -j
 sudo make install
 ```
