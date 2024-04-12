@@ -29,16 +29,29 @@
 #include "tagCircle21h7.h"
 #include "tagCircle49h12.h"
 ////////////////////////////////////////// camera parameters and variables/////////////////////////////////////////////
-const cv::Mat K = ( cv::Mat_<double> ( 3,3 ) << 397.30,    0.0, 320.13,
-                                                    0.0, 394.03, 262.50,
-                                                    0.0,    0.0,    1.0 );//
-// [k1,k2,p1,p2,k3,k4,k5,k6,s1,s2,s3,s4,taux,tauy] of 4, 5, 8, 12 or 14 elements.
-// If the vector is empty, the zero distortion coefficients are assumed.
-const cv::Mat D = ( cv::Mat_<double> ( 4,1 ) << -3.5897074026113568e-01, 9.6480686476447072e-02, -2.0615787184859718e-03, -6.1006160991551920e-04);
-const int ImgWidth = 1280;
+//hikborot
+// const cv::Mat K = ( cv::Mat_<double> ( 3,3 ) << 794.61,    0.0, 640.26,
+//                                                    0.0, 788.06, 525.00,
+//                                                    0.0,    0.0,    1.0 );//
+// // [k1,k2,p1,p2,k3,k4,k5,k6,s1,s2,s3,s4,taux,tauy] of 4, 5, 8, 12 or 14 elements.
+// // If the vector is empty, the zero distortion coefficients are assumed.
+// const cv::Mat D = ( cv::Mat_<double> ( 4,1 ) << -3.5897074026113568e-01, 9.6480686476447072e-02, -2.0615787184859718e-03, -6.1006160991551920e-04);
+// const int ImgWidth = 1280;
+// const int ImgHeight = 1024;
+
+//airsim drone51
+const cv::Mat K = ( cv::Mat_<double> ( 3,3 ) << 610.25,    0.0, 512,
+                                                   0.0, 610.25, 512,
+                                                   0.0,    0.0,  1.0 );//
+const cv::Mat D = ( cv::Mat_<double> ( 4,1 ) << 0.0, 0.0, 0.0, 0.0);
+const int ImgWidth = 1024;
 const int ImgHeight = 1024;
+
+
+////////////////////////////////////////// global variables/////////////////////////////////////////////
 static cv::Mat map1_;
 static cv::Mat map2_;
+
 
 // template<typename T>
 // T getAprilTagOption(ros::NodeHandle& pnh, const std::string& param_name, const T & default_val)
