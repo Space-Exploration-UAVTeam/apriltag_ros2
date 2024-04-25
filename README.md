@@ -37,3 +37,8 @@ source /[your home directory]/apriltag_ws/install/setup.bash
 ```
 ros2 launch apriltag_ros2 continuous_detection_launch.py
 ```
+
+## Coordinates and Output
+- camera frame: looking from behind the camera (like a photographer), x is right, y is down and z is straight ahead.  
+- tag frame: looking straight at the tag (oriented correctly), x is right, y is up and z is towards you (out of the tag).
+- the default output of the programe is: Transform_tag2cam: Cam rotation & translation relative to Tag.
