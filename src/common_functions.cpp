@@ -24,6 +24,8 @@ TagDetector::TagDetector(rclcpp::Node::SharedPtr node) : node_(node)
   // int id = 0; // tag id
   // double size = 0.16;    // Tag size (square, side length in meters)
   std::string frame_name = "haha";
+  // StandaloneTagDescription description_0(0, 0.16, frame_name); //UE/airsim simulation parameters!!!
+  // standalone_tag_descriptions_.insert(std::make_pair(0, description_0));
   StandaloneTagDescription description_0(0, 6.432, frame_name); //UE/airsim simulation parameters!!!
   standalone_tag_descriptions_.insert(std::make_pair(0, description_0));
   StandaloneTagDescription description_1(1, 0.608, frame_name);
@@ -419,15 +421,23 @@ Eigen::Matrix4d TagDetector::getRelativeTransform(std::vector<cv::Point3d > obje
   //                          0,   0,  1);
   // cv::Vec4f distCoeffs(0,0,0,0); // distortion coefficients
   cv::solvePnP(objectPoints, imagePoints, K, D, rvec, tvec);
-
   cv::Matx33d R;
   cv::Rodrigues(rvec, R);
+
+  // // when tag plane parallel to camera plane, you got a Tag traslation from cam, and a quaternion =(0,0,0,1) zero rotation!!!
+  // Eigen::Matrix3d wRo;
+  // wRo << R(0,0), R(0,1), R(0,2), R(1,0), R(1,1), R(1,2), R(2,0), R(2,1), R(2,2);
+  // Eigen::Matrix4d T; // homogeneous transformation matrix
+  // T.topLeftCorner(3, 3) = wRo;
+  // T.col(3).head(3) << tvec.at<double>(0), tvec.at<double>(1), tvec.at<double>(2);
+  // T.row(3) << 0,0,0,1;
+
+  // you got a Transform_tag2cam: Cam rotation & translation relative to Tag.
   Eigen::Matrix3d wRo,tmpwRo;
   tmpwRo << R(0,0), R(0,1), R(0,2), R(1,0), R(1,1), R(1,2), R(2,0), R(2,1), R(2,2);//R^c_w
-
   Eigen::Vector3d t;
   t << tvec.at<double>(0), tvec.at<double>(1), tvec.at<double>(2);//t^c_w
-  t = - tmpwRo.transpose() * t;//t^w_b = -[R^c_w]^T * t^c_w
+  // t = - tmpwRo.transpose() * t;//t^w_b = -[R^c_w]^T * t^c_w
 
   Eigen::Matrix3d rr;
   rr << 0,0,1,-1,0,0,0,-1,0;//R^b_c
