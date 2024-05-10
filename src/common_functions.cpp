@@ -28,12 +28,14 @@ TagDetector::TagDetector(rclcpp::Node::SharedPtr node) : node_(node)
   // standalone_tag_descriptions_.insert(std::make_pair(0, description_0));
   StandaloneTagDescription description_0(0, 6.432, frame_name); //UE/airsim simulation parameters!!!
   standalone_tag_descriptions_.insert(std::make_pair(0, description_0));
-  StandaloneTagDescription description_1(1, 0.608, frame_name);
-  standalone_tag_descriptions_.insert(std::make_pair(1, description_1));
-  StandaloneTagDescription description_2(2, 0.608, frame_name);
-  standalone_tag_descriptions_.insert(std::make_pair(2, description_2));
-  StandaloneTagDescription description_3(3, 0.608, frame_name);
-  standalone_tag_descriptions_.insert(std::make_pair(3, description_3));
+  // StandaloneTagDescription description_1(1, 0.608, frame_name);
+  // standalone_tag_descriptions_.insert(std::make_pair(1, description_1));
+  // StandaloneTagDescription description_2(2, 0.608, frame_name);
+  // standalone_tag_descriptions_.insert(std::make_pair(2, description_2));
+  // StandaloneTagDescription description_3(3, 0.608, frame_name);
+  // standalone_tag_descriptions_.insert(std::make_pair(3, description_3));
+  StandaloneTagDescription description_4(4, 0.6, frame_name);
+  standalone_tag_descriptions_.insert(std::make_pair(4, description_4));
 
   // Define the tag family whose tags should be searched for in the camera images
   if (family_ == "tagStandard52h13")
@@ -440,7 +442,7 @@ Eigen::Matrix4d TagDetector::getRelativeTransform(std::vector<cv::Point3d > obje
   // t = - tmpwRo.transpose() * t;//t^w_b = -[R^c_w]^T * t^c_w
 
   Eigen::Matrix3d rr;
-  rr << 0,0,1,-1,0,0,0,-1,0;//R^b_c
+  rr << 1,0,0,0,-1,0,0,0,-1;//R^b_c
   tmpwRo = rr * tmpwRo;//R^b_c * R^c_w
   wRo = tmpwRo.transpose();//R^w_b = [R^c_w]^T * R^c_b = [R^b_c * R^c_w]^T
 
